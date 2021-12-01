@@ -1,0 +1,50 @@
+#titre_acceuil {
+    color:rgb(0, 103, 110);
+    margin-top: 15px;
+    margin-left: -10px;
+}
+
+#sous_titre_acceuil {
+    color:rgb(255, 255, 255);
+    margin-top: -55px;  
+    margin-left: 40px;
+}
+
+#header {
+    background-color: rgb(61, 61, 61);
+}
+
+#nav_1 {
+    background-color: rgb(35, 117, 155);
+    color: white;
+}
+
+#instruction_1 {
+    font-weight: bold;
+}
+
+a:any-link {
+    color: white;
+}
+
+#footer {
+    color: white;
+    background-color: rgb(61, 61, 61);
+}
+
+.img-fluid {
+    /* max-width: 180px;
+    max-height: 180px; */
+    width: 80%;
+    height: 80%;
+}
+
+#nav_list {
+    font-size: 110%;
+}
+
+/* .produit_description {
+    text-align: center;
+    position: relative;
+    margin: auto;
+} */
