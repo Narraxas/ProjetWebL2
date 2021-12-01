@@ -41,6 +41,7 @@ a:any-link {
 
 #nav_list {
     font-size: 110%;
+    list-style-type: none;
 }
 
 /* .produit_description {
