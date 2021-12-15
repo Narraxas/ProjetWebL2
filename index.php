@@ -14,23 +14,7 @@
 
     <body>
         <form action="http://localhost:8100/server/facture.php" method="GET">
-            <header id="header">
-                <div class="row">
-                    <img id="logo" class="img-fluid img-thumbnail col-sm-1" src="assets/logo.jpeg">
-                    <div class="col-sm-8">
-                        <br>
-                        <h1 id="titre_acceuil">Hard Discounter</h1>
-                        <h2 id="sous_titre_acceuil">Votre magasin en ligne</h2>
-                    </div>
-                    <div class="col-sm-1">
-                        <a href="/connexion"><input type="button" id="btn_connexion" class=" img-thumbnail buttons" value="Se connecter"></button></a>
-                    </div>
-                    <div class="col-sm-1">
-                        <a href="/panier"><img id="img_panier" src="assets/panier.png"></a>
-                    </div>
-                    <div class="col-sm-1"></div>
-                </div>
-            </header>
+            <?php include('header.php'); ?>
             <main id="main">
                 <nav id="main_nav" class="row">
                     <div class="col-sm-2"></div>
@@ -78,19 +62,7 @@
                 </div>
             </div>
             </main>
-            <footer class="row" id="footer">
-                <div>
-                    <br>
-                </div>
-                <div class="text-center">L2 info Web project</div>
-                <div>
-                    <br>
-                </div>
-                    <ul class="text-center">
-                    <li>VERLICK Antoine</li>
-                    <li>DEURVEILHER Jean Louis</li>
-                </ul>
-            </footer>
+            <?php include('footer.php'); ?>
         </form>
         <script>
             $('.carousel').carousel({ interval: 4000 })
