@@ -121,7 +121,7 @@
                     <br />
                     <button type="submit" class="center btn btn-primary">S'inscrire</button>
                     <br />
-                    <div>Vous avez déjà un compte ? <a id="connection_link" href="login.php">Connexion</a></div>
+                    <div>Vous avez déjà un compte ? <a id="connexion_link" href="login.php">Connexion</a></div>
                     <br />
                 </div>
             </form>

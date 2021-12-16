@@ -121,3 +121,52 @@
     text-decoration: underline;
     color: rgb(61, 61, 61);
 }
+
+.article_link {
+    text-decoration: none;
+    color: rgb(61, 61, 61);
+}
+
+.article_link:hover {
+    text-decoration: none;
+    color: rgb(35, 117, 155);
+}
+
+#connexion_link {
+    color: rgb(35, 117, 155);
+    text-decoration: none;
+}
+
+#connexion_link:hover {
+    text-decoration: underline;
+    color: rgb(61, 61, 61);
+}
+
+#image_article {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    max-width: 100%;
+    height: auto;
+}
+
+#article_container {
+    padding-top : 5%;
+    padding-left : 10%;
+    margin-bottom: 10%;
+}
+
+#nom_article {
+    font-size: 32px;
+}
+
+#marque_article {
+    font-size: 24px;
+}
+
+#description_article {
+    font-size: 18px;
+}
+
+#prix_article {
+    font-size: 18px;
+}

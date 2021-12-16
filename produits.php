@@ -23,13 +23,20 @@
             $port='3306';
             $dns = 'mysql:host='.$host .';dbname='.$dbName.';port='.$port;
             $connection = new PDO( $dns, $utilisateur, $motDePasse);
-        } catch ( Exception $e ) {
+        } catch (Exception $e) {
             echo "Connection à la BDD impossible : ", $e->getMessage();
             die();
         }
-        $reqSql = 'SELECT * FROM produits';
-        $req = $connection->prepare($reqSql);
-        $req->execute();
+        if (!isset($_GET["categorie"])) {
+            $reqSql = 'SELECT * FROM produits';
+            $req = $connection->prepare($reqSql);
+            $req->execute();
+        }
+        else {
+            $reqSql = 'SELECT * FROM produits WHERE categorie = ?';
+            $req = $connection->prepare($reqSql);
+            $req->execute([$_GET["categorie"]]);
+        }
         $produits = $req->fetchAll();
         echo '<div class="produit_container">';
         $i = 0;
@@ -39,7 +46,7 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-10 row">';
             }
-            echo '<div class="col-sm-3 article"><div class="text-center"><img class="img_article" src="./' . $produit["photo"] . '"></div><div class="text-center nom_article">' . $produit["nom"] . '</div><div class="text-center prix_article">' . $produit["prix"] . '€</div></div>';
+            echo '<div class="col-sm-3 article"><div class="text-center"><a class="article_link" href="article.php?idProduit=' . $produit["idProduit"] . '"><img class="img_article" src="./' . $produit["photo"] . '"></div><div class="text-center nom_article">' . $produit["nom"] . '</div><div class="text-center prix_article">' . $produit["prix"] . '€</div></a></div>';
             $i++;
             if ($i === 4) {
                 echo '</div>
