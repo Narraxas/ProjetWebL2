@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +16,7 @@
 
     <body>
         <form action="http://localhost:8100/server/facture.php" method="GET">
-            <?php include("header.php"); ?>
+            <?php include_once("header.php"); ?>
             <main id="main">
                 <div class="container">
                     <div class="searchbar">
@@ -54,7 +56,7 @@
                 </div>
             </div>
             </main>
-            <?php include("footer.php"); ?>
+            <?php include_once("footer.php"); ?>
         </form>
         <script>
             $(".carousel").carousel({ interval: 4000 })

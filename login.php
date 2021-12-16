@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,7 +14,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
     <body>
-        <?php include("header.php"); ?>
+        <?php include_once("header.php"); ?>
         <?php
         try {
             $dbName = 'hard_discounter';
@@ -36,17 +38,15 @@
             if (isset($_POST["email"]) && isset($_POST["motDePasse"])) {
                 foreach ($clients as $client) {
                     if ($client["email"] === $_POST["email"] && $client["motDePasse"] === $_POST["motDePasse"]) {
-                        $utilisateurConnecte = [
-                            "email" => $client["email"],
-                        ];
+                        $_SESSION["UTILISATEUR_CONNECTE"] = $client["email"];
                     } else {
-                        $messageErreur = sprintf("Identifiants incorrects : %s / %s", $_POST["email"], $_POST["motDePasse"]);
+                        $messageErreur = sprintf("Identifiants incorrects : %s", $_POST["email"]);
                     }
                 }
             }
         ?>
 
-        <?php if (!isset($utilisateurConnecte)): ?>
+        <?php if (!isset($_SESSION["UTILISATEUR_CONNECTE"])): ?>
             <form action="login.php" method="post">
                 <?php if (isset($messageErreur)): ?>
                     <div class="alert alert-danger" role="alert">
@@ -88,19 +88,19 @@
             <br />
         <?php else: ?>
         <div class="alert alert-success" role="alert">
-            Bienvenue <?php echo $utilisateurConnecte['email']; ?> !
+            Bienvenue <?php echo $_SESSION["UTILISATEUR_CONNECTE"]; ?> !
             Connexion Réussie.
         </div>
         <div class="text-center">
             <br />
             <br />
             <form method="get" action="/index.php">
-                <button type="submit" class="center btn btn-primary">Retour à l'acceuil</button>
+                <button type="submit" class="center btn btn-primary">Retour à l'accueil</button>
             </form>
             <br />
             <br />
         </div>
         <?php endif; ?>
-        <?php include("footer.php"); ?>
+        <?php include_once("footer.php"); ?>
     </body>
 </html>
