@@ -14,16 +14,8 @@
 
     <body>
         <form action="http://localhost:8100/server/facture.php" method="GET">
-            <?php include('header.php'); ?>
+            <?php include("header.php"); ?>
             <main id="main">
-                <nav id="main_nav" class="row">
-                    <div class="col-sm-2"></div>
-                    <a class="col-sm-2" href="#portable_ancor"><h5>Portables</h5></a>
-                    <a class="col-sm-2" href="#tablette_ancor"><h5>Tablettes</h5></a>
-                    <a class="col-sm-2" href="#smartphone_ancor"><h5>Smartphones</h5></a>
-                    <a class="col-sm-2" href="/produits.php"><h5>Tous les produits</h5></a>
-                    <div class="col-sm-2"></div>
-                </nav>
                 <div class="container">
                     <div class="searchbar">
                         <form class="navbar-form navbar-left col-sm-4" role="search">
@@ -62,10 +54,10 @@
                 </div>
             </div>
             </main>
-            <?php include('footer.php'); ?>
+            <?php include("footer.php"); ?>
         </form>
         <script>
-            $('.carousel').carousel({ interval: 4000 })
+            $(".carousel").carousel({ interval: 4000 })
         </script>
     </body>
 </html>

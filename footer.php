@@ -1,4 +1,4 @@
-<footer class="row" id="footer">
+<footer id="footer">
     <div>
         <br>
     </div>
@@ -6,7 +6,5 @@
     <div>
         <br>
     </div>
-        <ul class="text-center">
-        <li>DEURVEILHER Jean Louis</li>
-    </ul>
+    <div class="text-center">DEURVEILHER Jean Louis</div>
 </footer>
