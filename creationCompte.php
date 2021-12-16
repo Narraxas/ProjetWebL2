@@ -32,22 +32,26 @@
         $req = $connection->prepare($reqSql);
         $req->execute();
         $clients = $req->fetchAll();
-
         ?>
         <?php
             if (isset($_POST["email"]) && isset($_POST["motDePasse"])) {
                 foreach ($clients as $client) {
                     if ($client["email"] === $_POST["email"] && $client["motDePasse"] === $_POST["motDePasse"]) {
-                        $_SESSION["UTILISATEUR_CONNECTE"] = $client["email"];
-                    } else {
-                        $messageErreur = sprintf("Identifiants incorrects : %s", $_POST["email"]);
+                        $messageErreur = sprintf("Adresse email déjà utilisée : %s", $_POST["email"]);
+                        $compteExistant = true;
                     }
+                }
+                if (!isset($compteExistant)) {
+                    $reqSql = 'INSERT INTO clients (email, motDePasse, nom, prenom, ville, adresse, telephone) VALUES (?, ?, ?, ?, ?, ?, ?)';
+                    $req = $connection->prepare($reqSql);
+                    $req->execute([$_POST["email"], $_POST["motDePasse"], $_POST["nom"], $_POST["prenom"], $_POST["ville"], $_POST["adresse"], $_POST["telephone"]]);
+                    $_SESSION["UTILISATEUR_INSCRIT"] = $_POST["email"];
                 }
             }
         ?>
 
-        <?php if (!isset($_SESSION["UTILISATEUR_CONNECTE"])): ?>
-            <form action="login.php" method="post">
+        <?php if (!isset($_SESSION["UTILISATEUR_INSCRIT"])): ?>
+            <form action="creationCompte.php" method="post">
                 <?php if (isset($messageErreur)): ?>
                     <div class="alert alert-danger" role="alert">
                         <?php echo $messageErreur; ?>
@@ -58,7 +62,7 @@
                     <div class="col-sm-4">
                         <br />
                         <br />
-                        <h2 class="text-center">Se connecter</h2>
+                        <h2 class="text-center">Créer un compte</h2>
                         <hr />
                         <br />
                     </div>
@@ -67,30 +71,65 @@
                 <div class="row">
                     <div class="col-sm-4"></div>
                     <div class="col-sm-4">
-                        <input type="email" name="email" id="email" class="form-control" placeholder="Adresse mail">
+                        <input type="email" name="email" class="form-control" placeholder="Adresse mail">
                     </div>
                     <div class="col-sm-4"></div>
                 </div>
                 <div class="row">
                     <div class="col-sm-4"></div>
                     <div class="col-sm-4">
-                        <input type="password" name="motDePasse" id="motDePasse" class="form-control" placeholder="Mot de passe">
+                        <input type="password" name="motDePasse" class="form-control" placeholder="Mot de passe">
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                        <input type="text" name="nom" class="form-control" placeholder="Nom">
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                        <input type="text" name="prenom" class="form-control" placeholder="Prénom">
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                        <input type="text" name="ville" class="form-control" placeholder="Ville">
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                    <input type="text" name="adresse" class="form-control" placeholder="Adresse">
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                    <input type="text" name="telephone" class="form-control" placeholder="Telephone">
                     </div>
                     <div class="col-sm-4"></div>
                 </div>
                 <div class="text-center">
                     <br />
-                    <button type="submit" class="center btn btn-primary">Se connecter</button>
+                    <button type="submit" class="center btn btn-primary">S'inscrire</button>
                     <br />
-                    <div>Vous n'avez pas encore de compte ? <a id="inscription_link" href="creationCompte.php">Inscription</a></div>
+                    <div>Vous avez déjà un compte ? <a id="connection_link" href="login.php">Connexion</a></div>
                     <br />
                 </div>
             </form>
             <br />
         <?php else: ?>
         <div class="alert alert-success" role="alert">
-            Bienvenue <?php echo $_SESSION["UTILISATEUR_CONNECTE"]; ?> !
-            Connexion Réussie.
+            Bienvenue <?php echo $_POST["email"]; ?> !
+            Création de compte réussie.
         </div>
         <div class="text-center">
             <br />

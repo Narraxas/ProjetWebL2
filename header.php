@@ -24,10 +24,10 @@
     </div>
     <nav id="main_nav" class="row">
         <div class="col-sm-2"></div>
-        <a class="col-sm-2" href="/portables.php"><h5>Portables</h5></a>
-        <a class="col-sm-2" href="/tablettes.php"><h5>Tablettes</h5></a>
-        <a class="col-sm-2" href="/mobiles.php"><h5>Smartphones</h5></a>
-        <a class="col-sm-2" href="/produits.php"><h5>Tous les produits</h5></a>
+        <a class="col-sm-2 nav_link" href="/portables.php"><h5>Portables</h5></a>
+        <a class="col-sm-2 nav_link" href="/tablettes.php"><h5>Tablettes</h5></a>
+        <a class="col-sm-2 nav_link" href="/mobiles.php"><h5>Smartphones</h5></a>
+        <a class="col-sm-2 nav_link" href="/produits.php"><h5>Tous les produits</h5></a>
         <div class="col-sm-2"></div>
     </nav>
 </header>

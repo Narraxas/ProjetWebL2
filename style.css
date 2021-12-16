@@ -47,12 +47,12 @@
     font-style: normal;
 }
 
-a:any-link {
+.nav_link {
     color: white;
     text-decoration: none;
 }
 
-a:any-link:hover {
+.nav_link:hover {
     text-decoration: underline;
     color: white;
 }
@@ -110,4 +110,14 @@ a:any-link:hover {
 
 .produit_container {
     margin: 1%;
+}
+
+#inscription_link {
+    color: rgb(35, 117, 155);
+    text-decoration: none;
+}
+
+#inscription_link:hover {
+    text-decoration: underline;
+    color: rgb(61, 61, 61);
 }
