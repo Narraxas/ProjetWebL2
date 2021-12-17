@@ -15,10 +15,6 @@
     </head>
     <body>
         <?php include_once("header.php"); ?>
-        <div class="alert alert-success" role="alert">
-            Vous avez été déconnecté avec succès !
-            Déconnexion Réussie.
-        </div>
         <?php session_destroy(); ?>
         <div class="text-center">
             <br />

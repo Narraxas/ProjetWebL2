@@ -21,6 +21,16 @@
     padding: 20px;
 }
 
+.buttons {
+    background-color: rgb(35, 117, 155);
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
 #btn_connexion {
     background-color: rgb(0, 103, 110);
     padding-top: 1vh;
@@ -31,6 +41,15 @@
 }
 
 #btn_deconnexion {
+    background-color: rgb(0, 103, 110);
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    margin-top: 4vh;
+}
+
+#btn_historique {
     background-color: rgb(0, 103, 110);
     padding-top: 1vh;
     padding-bottom: 1vh;
@@ -64,16 +83,6 @@
     background-repeat: no-repeat;
     width: 1110px;
     height: 550px;
-}
-
-.buttons {
-    background-color: rgb(35, 117, 155);
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
 }
 
 .searchbar {
