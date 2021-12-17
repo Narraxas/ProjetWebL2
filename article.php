@@ -55,42 +55,48 @@
                 </div>';
             }
             if (isset($_GET["ajoutPanier"])) {
-                echo '<div class="alert alert-success" role="alert">
-                Article ' . $produit["nom"] . ' ajouté au panier avec succès!
-                </div>';
-                $reqSql = 'SELECT * FROM commandes';
-                $req = $connection->prepare($reqSql);
-                $req->execute();
-                $commandes = $req->fetchAll();
-                foreach ($commandes as $commande) {
-                    if ($commande["etat"] !== true) {
-                        $commandeActuelle = $commande;
-                        break;
-                    }
-                }
-                if (!isset($commandeActuelle)) {
-                    $reqSql = 'INSERT INTO commandes (idCommande, date_cs, email, etat) VALUES (?, ?, ?, ?)';
-                    $req = $connection->prepare($reqSql);
-                    $req->execute([0, "2021", $_SESSION["UTILISATEUR_CONNECTE"], 0]);
+                if (isset($_SESSION["UTILISATEUR_CONNECTE"])) {
+                    echo '<div class="alert alert-success" role="alert">
+                    Article ' . $produit["nom"] . ' ajouté au panier avec succès!
+                    </div>';
                     $reqSql = 'SELECT * FROM commandes';
                     $req = $connection->prepare($reqSql);
                     $req->execute();
                     $commandes = $req->fetchAll();
                     foreach ($commandes as $commande) {
-                        if ($commande["etat"] !== true) {
-                            $commandeActuelle = $commande;
+                        if ($commande["etat"] === "0") {
+                            $_SESSION["commandeActuelle"] = $commande;
+                            $commandeEnCours = true;
                             break;
                         }
                     }
-                }
-                $reqSql = 'SELECT * FROM produits WHERE idProduit = ' . $_GET['idProduit'];
-                $req = $connection->prepare($reqSql);
-                $req->execute();
-                $produitCommande = $req->fetchAll();
-                foreach ($produits as $ajoutCommande) {
-                    $reqSql = 'INSERT INTO lignesCommandes (idLigneCommande, idCommande, idProduit, quantite, montant) VALUES (?, ?, ?, ?, ?)';
+                    if (!isset($commandeEnCours)) {
+                        $reqSql = 'INSERT INTO commandes (idCommande, date_c, email, etat) VALUES (?, ?, ?, ?)';
+                        $req = $connection->prepare($reqSql);
+                        $req->execute([0, "2021", $_SESSION["UTILISATEUR_CONNECTE"], 0]);
+                        $reqSql = 'SELECT * FROM commandes';
+                        $req = $connection->prepare($reqSql);
+                        $req->execute();
+                        $commandes = $req->fetchAll();
+                        foreach ($commandes as $commande) {
+                            if ($commande["etat"] === 0) {
+                                $_SESSION["commandeActuelle"] = $commande;
+                                break;
+                            }
+                        }
+                    }
+                    $reqSql = 'SELECT * FROM produits WHERE idProduit = ' . $_GET['idProduit'];
                     $req = $connection->prepare($reqSql);
-                    $req->execute([0, $commandeActuelle["idCommande"], $ajoutCommande["idProduit"], 1, $ajoutCommande["prix"]]);
+                    $req->execute();
+                    $produitCommande = $req->fetchAll();
+                    foreach ($produits as $ajoutCommande) {
+                        $reqSql = 'INSERT INTO lignesCommandes (idLigneCommande, idCommande, idProduit, quantite, montant) VALUES (?, ?, ?, ?, ?)';
+                        $req = $connection->prepare($reqSql);
+                        $req->execute([0, $_SESSION["commandeActuelle"]["idCommande"], $ajoutCommande["idProduit"], 1, $ajoutCommande["prix"]]);
+                    }
+                } else {
+                    header('Location: /login.php');
+                    exit();
                 }
             }
         }
