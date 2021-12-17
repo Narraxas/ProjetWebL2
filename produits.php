@@ -27,15 +27,21 @@
             echo "Connection à la BDD impossible : ", $e->getMessage();
             die();
         }
-        if (!isset($_GET["categorie"])) {
-            $reqSql = 'SELECT * FROM produits';
+        if (isset($_GET["recherche"])) {
+            $reqSql = 'SELECT * FROM produits WHERE idProduit LIKE "%' . $_GET["recherche"] . '%" OR nom LIKE "%' . $_GET["recherche"] . '%" OR marque LIKE "%' . $_GET["recherche"] . '%" OR categorie LIKE "%' . $_GET["recherche"] . '%" OR descriptif LIKE "%' . $_GET["recherche"] . '%" OR prix LIKE "%' . $_GET["recherche"] . '%"';
             $req = $connection->prepare($reqSql);
             $req->execute();
-        }
-        else {
-            $reqSql = 'SELECT * FROM produits WHERE categorie = ?';
-            $req = $connection->prepare($reqSql);
-            $req->execute([$_GET["categorie"]]);
+        } else {
+            if (!isset($_GET["categorie"])) {
+                $reqSql = 'SELECT * FROM produits';
+                $req = $connection->prepare($reqSql);
+                $req->execute();
+            }
+            else {
+                $reqSql = 'SELECT * FROM produits WHERE categorie = ?';
+                $req = $connection->prepare($reqSql);
+                $req->execute([$_GET["categorie"]]);
+            }
         }
         $produits = $req->fetchAll();
         echo '<div class="produit_container">';

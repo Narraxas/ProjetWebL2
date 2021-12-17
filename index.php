@@ -15,7 +15,7 @@
     </head>
 
     <body>
-        <form action="http://localhost:8100/server/facture.php" method="GET">
+        <form action="/produits.php" method="GET">
             <?php include_once("header.php"); ?>
             <main id="main">
                 <div class="container">
@@ -24,7 +24,7 @@
                             <div class="row">
                                 <div class="col-sm-4"></div>
                                 <div class="form-group col-sm-3">
-                                    <input type="text" class="form-control" placeholder="Entrer un nom d'article ou une catégorie...">
+                                    <input type="text" class="form-control" name="recherche" placeholder="Entrer un nom d'article ou une catégorie...">
                                 </div>
                                 <button type="submit" class="col-sm-1 buttons">Rechercher</button>
                                 <div class="col-sm-4"></div>
